@@ -1,0 +1,76 @@
+.toy-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.toy-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.toy-card .position-relative {
+  overflow: hidden;
+}
+
+.toy-card img {
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.toy-card:hover img {
+  transform: scale(1.05);
+}
+
+.toy-card .card-body {
+  padding: 1rem;
+}
+
+.toy-card .card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.toy-card .card-text {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.toy-card .price-tag {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.toy-card .price-sale {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.toy-card .price-original {
+  font-size: 0.875rem;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 0.5rem;
+}
+
+.toy-card .rating-stars {
+  color: #ffc107;
+  font-size: 0.875rem;
+}
+
+.badge-custom {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+@media (max-width: 768px) {
+  .toy-card img {
+    height: 150px;
+  }
+}

@@ -1,0 +1,15 @@
+.product-listing {
+  padding: 1rem 0;
+}
+
+.product-listing .row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .product-listing .row {
+    --bs-gutter-x: 1rem;
+    --bs-gutter-y: 1rem;
+  }
+}

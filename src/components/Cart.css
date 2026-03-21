@@ -1,0 +1,50 @@
+.cart-page {
+  padding: 1rem 0;
+}
+
+.cart-page .table th {
+  font-weight: 600;
+  color: #666;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quantity-control {
+  width: 120px;
+}
+
+.quantity-control input {
+  border-left: none;
+  border-right: none;
+  font-weight: 600;
+}
+
+.quantity-control button {
+  width: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-cart {
+  padding: 3rem 1rem;
+}
+
+.empty-cart .alert {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .cart-page .table {
+    font-size: 0.875rem;
+  }
+  
+  .cart-page .table img {
+    width: 40px;
+    height: 40px;
+  }
+}

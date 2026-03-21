@@ -1,0 +1,99 @@
+.product-detail-page {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.product-detail-page .breadcrumb {
+  background: transparent;
+  padding: 0;
+}
+
+.product-detail-page .breadcrumb .btn-link {
+  text-decoration: none;
+  color: #667eea;
+}
+
+.product-images .main-image {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.product-images .main-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.sale-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: #dc3545;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.product-info .product-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.product-info .rating .stars {
+  color: #ffc107;
+  font-size: 1.125rem;
+}
+
+.product-info .price-section .current-price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.product-info .price-section .sale-price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #dc3545;
+}
+
+.product-info .price-section .original-price {
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
+}
+
+.product-info .price-section .discount-badge {
+  background: #dc3545;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+}
+
+.product-info .description {
+  color: #666;
+  line-height: 1.6;
+}
+
+.quantity-selector label {
+  font-weight: 600;
+}
+
+.action-buttons .btn-lg {
+  padding: 0.75rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .product-info .product-title {
+    font-size: 1.5rem;
+  }
+  
+  .product-info .price-section .current-price,
+  .product-info .price-section .sale-price {
+    font-size: 1.5rem;
+  }
+}
