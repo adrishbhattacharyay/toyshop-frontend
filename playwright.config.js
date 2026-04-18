@@ -15,5 +15,16 @@ export default defineConfig({
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    {
+      name: 'demo',
+      testMatch: '**/demo-video.spec.js',
+      use: {
+        ...devices['Desktop Chrome'],
+        headless: false,
+        video: 'on',
+        viewport: { width: 1280, height: 800 },
+        slowMo: 400,
+      },
+    },
   ],
 })
