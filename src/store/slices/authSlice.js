@@ -21,7 +21,10 @@ export const register = createAsyncThunk(
       const response = await api.post('/api/v1/auth/register', userData)
       return response.data
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Registration failed')
+      const msg = error.response?.data?.message
+        || error.response?.data?.validationErrors
+        || 'Registration failed'
+      return rejectWithValue(typeof msg === 'object' ? Object.values(msg).join(', ') : msg)
     }
   }
 )

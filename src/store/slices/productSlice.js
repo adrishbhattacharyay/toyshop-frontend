@@ -5,7 +5,16 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchAll',
   async (params = {}, { rejectWithValue }) => {
     try {
-      const response = await api.get('/api/v1/products', { params })
+      const { sort, category, keyword, ...rest } = params
+      const apiParams = { ...rest }
+      // Map sort to sortBy/sortDir
+      if (sort === 'price-low') { apiParams.sortBy = 'price'; apiParams.sortDir = 'asc' }
+      else if (sort === 'price-high') { apiParams.sortBy = 'price'; apiParams.sortDir = 'desc' }
+      else { apiParams.sortBy = 'createdAt'; apiParams.sortDir = 'desc' }
+      // Pass category and keyword directly - backend now handles them
+      if (category) apiParams.category = category
+      if (keyword) apiParams.keyword = keyword
+      const response = await api.get('/api/v1/products', { params: apiParams })
       return response.data
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to fetch products')

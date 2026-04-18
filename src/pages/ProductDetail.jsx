@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductById, clearSelectedProduct } from '../store/slices/productSlice'
 import { addToCart } from '../store/slices/cartSlice'
+import { toast } from 'react-toastify'
 import './ProductDetail.css'
 
 function ProductDetail() {
@@ -11,24 +12,24 @@ function ProductDetail() {
   const dispatch = useDispatch()
   const { selectedProduct: product, loading, error } = useSelector((state) => state.products)
   const [quantity, setQuantity] = useState(1)
-  const [activeImage, setActiveImage] = useState(0)
 
   useEffect(() => {
-    dispatch(fetchProductById(parseInt(id)))
+    dispatch(fetchProductById(id))
     return () => {
       dispatch(clearSelectedProduct())
     }
   }, [dispatch, id])
 
   const handleAddToCart = () => {
-    if (product && product.inStock) {
-      dispatch(addToCart({ ...product, quantity }))
+    if (product) {
+      for (let i = 0; i < quantity; i++) dispatch(addToCart(product))
+      toast.success(`${product.name} (x${quantity}) added to cart!`, { autoClose: 2000 })
     }
   }
 
   const handleBuyNow = () => {
-    if (product && product.inStock) {
-      dispatch(addToCart({ ...product, quantity }))
+    if (product) {
+      for (let i = 0; i < quantity; i++) dispatch(addToCart(product))
       navigate('/checkout')
     }
   }
@@ -100,8 +101,8 @@ function ProductDetail() {
               )}
 
               <div className="rating mb-3">
-                <span className="stars">⭐ {product.ratingAverage?.toFixed(1) || '0.0'}</span>
-                <span className="text-muted ms-2">({product.ratingCount || 0} reviews)</span>
+                <span className="stars">⭐ {product.averageRating?.toFixed(1) || '0.0'}</span>
+                <span className="text-muted ms-2">({product.reviewCount || 0} reviews)</span>
               </div>
 
               <div className="price-section mb-4">
@@ -163,14 +164,14 @@ function ProductDetail() {
                 <button 
                   className="btn btn-custom btn-custom-primary btn-lg me-3"
                   onClick={handleAddToCart}
-                  disabled={!product.inStock}
+                  disabled={product.inStock === false}
                 >
                   Add to Cart
                 </button>
                 <button 
                   className="btn btn-outline-primary btn-lg"
                   onClick={handleBuyNow}
-                  disabled={!product.inStock}
+                  disabled={product.inStock === false}
                 >
                   Buy Now
                 </button>

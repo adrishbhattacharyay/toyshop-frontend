@@ -1,67 +1,79 @@
 .auth-page {
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 120px);
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #EAEDED;
   padding: 2rem 0;
 }
 
 .auth-card {
   background: white;
-  border-radius: 16px;
-  padding: 2.5rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 1px solid #D5D9D9;
+  border-radius: 4px;
+  padding: 2rem;
+  max-width: 380px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .auth-card h2 {
-  color: #333;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #0F1111;
+  margin-bottom: 1.25rem;
 }
 
 .auth-card .form-label {
-  font-weight: 500;
-  color: #555;
-  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0F1111;
+  margin-bottom: 0.25rem;
 }
 
 .auth-card .form-control {
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
+  border: 1px solid #888;
+  border-radius: 3px;
+  padding: 6px 10px;
+  font-size: 0.875rem;
+}
+.auth-card .form-control:focus {
+  border-color: #e77600;
+  box-shadow: 0 0 0 3px rgba(228,121,17,0.5);
 }
 
-.auth-card .input-group {
-  border-radius: 8px;
-  overflow: hidden;
+.auth-submit-btn {
+  background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+  border: 1px solid #a88734;
+  border-radius: 3px;
+  color: #111;
+  font-size: 0.875rem;
+  padding: 8px 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.1s;
 }
+.auth-submit-btn:hover { background: linear-gradient(to bottom, #f5d78e, #eeb933); }
+.auth-submit-btn:disabled { background: #e9e9e9; border-color: #ccc; color: #888; cursor: not-allowed; }
 
-.auth-card .input-group .form-control {
-  border-radius: 0;
-}
-
-.auth-card .input-group .btn {
-  border-radius: 0 8px 8px 0;
-}
-
-.auth-card .btn-custom-primary {
-  padding: 0.875rem 1.5rem;
-  font-size: 1rem;
-}
-
-.auth-card .btn-custom-primary:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+.auth-divider {
+  border: none;
+  border-top: 1px solid #e7e7e7;
+  margin: 1.25rem 0;
 }
 
 .auth-card .alert {
-  border-radius: 8px;
+  font-size: 0.8rem;
+  border-radius: 3px;
+  padding: 8px 12px;
 }
 
+.auth-terms {
+  font-size: 0.75rem;
+  color: #565959;
+  margin-top: 1rem;
+}
+.auth-terms a { color: #007185; }
+
 @media (max-width: 576px) {
-  .auth-card {
-    padding: 1.5rem;
-  }
-  
-  .auth-card h2 {
-    font-size: 1.5rem;
-  }
+  .auth-card { padding: 1.25rem; }
 }

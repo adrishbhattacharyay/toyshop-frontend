@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import { register, clearError } from '../store/slices/authSlice'
+import { toast } from 'react-toastify'
 import './Auth.css'
 
 function Register() {
@@ -22,13 +23,10 @@ function Register() {
   const { isAuthenticated, loading, error } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/')
-    }
     return () => {
       dispatch(clearError())
     }
-  }, [isAuthenticated, navigate, dispatch])
+  }, [dispatch])
 
   const validateForm = () => {
     const errors = {}
@@ -81,8 +79,14 @@ function Register() {
     e.preventDefault()
     if (!validateForm()) return
 
-    const { confirmPassword, ...registerData } = formData
-    dispatch(register(registerData))
+    const { confirmPassword, phone, ...registerData } = formData
+    if (phone.trim()) registerData.phone = phone.trim()
+
+    const result = await dispatch(register(registerData))
+    if (register.fulfilled.match(result)) {
+      toast.success('Account created successfully! Please sign in.', { autoClose: 4000 })
+      navigate('/login')
+    }
   }
 
   return (
@@ -235,7 +239,7 @@ function Register() {
 
                 <button
                   type="submit"
-                  className="btn btn-custom btn-custom-primary w-100 mb-3"
+                  className="auth-submit-btn mb-3"
                   disabled={loading}
                 >
                   {loading ? (
@@ -244,7 +248,7 @@ function Register() {
                       Creating Account...
                     </>
                   ) : (
-                    'Create Account'
+                    'Create your ToyShop account'
                   )}
                 </button>
 

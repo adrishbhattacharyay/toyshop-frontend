@@ -9,7 +9,7 @@ function Checkout() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { items } = useSelector((state) => state.cart)
-  const { user } = useSelector((state) => state.auth)
+  const { user, isAuthenticated } = useSelector((state) => state.auth)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ function Checkout() {
     customerNotes: ''
   })
 
-  const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0)
   const tax = Math.round(subtotal * 0.18)
   const shipping = subtotal >= 500 ? 0 : 50
   const total = subtotal + tax + shipping
@@ -40,11 +40,11 @@ function Checkout() {
       const orderData = {
         userId: user?.id || 1,
         items: items.map(item => ({
-          productId: item.id,
+          productId: String(item.id),
           productSku: item.sku,
           productName: item.name,
           quantity: item.quantity,
-          unitPrice: item.price
+          unitPrice: parseFloat(item.price)
         })),
         shippingAddress: formData.shippingAddress,
         billingAddress: formData.billingAddress || formData.shippingAddress,
@@ -69,6 +69,18 @@ function Checkout() {
         <p className="text-muted">Add some items to checkout</p>
         <button className="btn btn-primary" onClick={() => navigate('/products')}>
           Continue Shopping
+        </button>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="container py-5 text-center">
+        <h3>Please login to checkout</h3>
+        <p className="text-muted">You need to be logged in to place an order</p>
+        <button className="btn btn-custom btn-custom-primary" onClick={() => navigate('/login')}>
+          Login
         </button>
       </div>
     )
@@ -272,7 +284,7 @@ function Checkout() {
                         <span>{item.name}</span>
                         <small className="text-muted d-block">Qty: {item.quantity}</small>
                       </div>
-                      <span>₹{item.price * item.quantity}</span>
+                      <span>₹{(parseFloat(item.price) * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                 </div>

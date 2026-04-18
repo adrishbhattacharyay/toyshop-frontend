@@ -6,8 +6,6 @@ import './Header.css'
 
 function Header() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  
   const { isAuthenticated, user } = useSelector((state) => state.auth)
   const { items } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
@@ -17,9 +15,7 @@ function Header() {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    if (searchTerm.trim()) {
-      navigate(`/products?search=${encodeURIComponent(searchTerm)}`)
-    }
+    if (searchTerm.trim()) navigate(`/products?search=${encodeURIComponent(searchTerm)}`)
   }
 
   const handleLogout = () => {
@@ -29,90 +25,89 @@ function Header() {
 
   return (
     <header className="header">
-      <nav className="navbar navbar-expand-lg navbar-custom sticky-top">
-        <div className="container-fluid">
-          <Link className="navbar-brand text-white fw-bold" to="/">
-            🎀 ToyShop
+      {/* Top bar */}
+      <div className="navbar-top">
+        <div className="container-fluid d-flex align-items-center gap-2">
+          {/* Logo */}
+          <Link className="navbar-brand-amz me-2" to="/">
+            🧸 Toy<span>Shop</span>
           </Link>
-          
-          <button 
-            className="navbar-toggler" 
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          
-          <div className={`collapse navbar-collapse ${mobileMenuOpen ? 'show' : ''}`} id="navbarNav">
-            <form className="search-box ms-auto me-3 flex-grow-1" onSubmit={handleSearch} role="search">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search toys..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                aria-label="Search products"
-              />
-            </form>
-            
-            <ul className="navbar-nav align-items-center">
-              <li className="nav-item">
-                <Link className="nav-link text-white" to="/products">
-                  Products
-                </Link>
-              </li>
-              
-              {isAuthenticated ? (
-                <>
-                  <li className="nav-item">
-                    <Link className="nav-link text-white" to="/orders">
-                      My Orders
-                    </Link>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <button 
-                      className="btn btn-outline-light dropdown-toggle ms-2"
-                      type="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      {user?.username || 'Account'}
-                    </button>
-                    <ul className="dropdown-menu dropdown-menu-end">
-                      <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
-                      <li><Link className="dropdown-item" to="/orders">My Orders</Link></li>
-                      <li><hr className="dropdown-divider" /></li>
-                      <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
-                    </ul>
-                  </li>
-                </>
-              ) : (
-                <li className="nav-item">
-                  <Link className="btn btn-outline-light ms-2" to="/login">
-                    Login
-                  </Link>
-                </li>
-              )}
-              
-              <li className="nav-item">
-                <button 
-                  className="btn btn-outline-light cart-icon position-relative ms-2"
-                  onClick={() => navigate('/cart')}
-                  aria-label="View cart"
-                >
-                  🛒 Cart
-                  {cartCount > 0 && (
-                    <span className="cart-badge" aria-label={`${cartCount} items in cart`}>
-                      {cartCount}
-                    </span>
-                  )}
+
+          {/* Search */}
+          <form className="search-form flex-grow-1" onSubmit={handleSearch}>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search toys, games, and more..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button type="submit" className="search-btn">🔍</button>
+          </form>
+
+          {/* Account */}
+          <div className="d-flex align-items-center gap-1 ms-2">
+            {isAuthenticated ? (
+              <div className="dropdown">
+                <button className="nav-link-amz dropdown-toggle" data-bs-toggle="dropdown">
+                  <span className="top-line">Hello, {user?.firstName || user?.username}</span>
+                  <span className="bottom-line">Account ▾</span>
                 </button>
-              </li>
-            </ul>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li><Link className="dropdown-item" to="/orders">My Orders</Link></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><button className="dropdown-item" onClick={handleLogout}>Sign Out</button></li>
+                </ul>
+              </div>
+            ) : (
+              <Link className="nav-link-amz" to="/login">
+                <span className="top-line">Hello, sign in</span>
+                <span className="bottom-line">Account &amp; Lists ▾</span>
+              </Link>
+            )}
+
+            {/* Orders */}
+            <Link className="nav-link-amz hide-mobile" to="/orders">
+              <span className="top-line">Returns</span>
+              <span className="bottom-line">&amp; Orders</span>
+            </Link>
+
+            {/* Cart */}
+            <button className="cart-btn" onClick={() => navigate('/cart')}>
+              <span style={{ fontSize: '1.5rem' }}>🛒</span>
+              <span className="cart-count">{cartCount}</span>
+              <span className="bottom-line">Cart</span>
+            </button>
+
+            {cartCount > 0 && (
+              <button
+                className="btn btn-sm btn-warning fw-bold ms-1"
+                style={{ borderRadius: '3px', fontSize: '0.8rem' }}
+                onClick={() => navigate('/checkout')}
+              >
+                Checkout →
+              </button>
+            )}
           </div>
         </div>
-      </nav>
+      </div>
+
+      {/* Bottom nav */}
+      <div className="navbar-bottom">
+        <div className="container-fluid d-flex align-items-center gap-1">
+          <Link className="bottom-nav-link" to="/products">☰ All</Link>
+          <Link className="bottom-nav-link" to="/products?category=Action+Figures">Action Figures</Link>
+          <Link className="bottom-nav-link" to="/products?category=Building+Blocks">Building Blocks</Link>
+          <Link className="bottom-nav-link" to="/products?category=Vehicles">Vehicles</Link>
+          <Link className="bottom-nav-link" to="/products?category=Dolls">Dolls</Link>
+          <Link className="bottom-nav-link" to="/products?category=Board+Games">Board Games</Link>
+          <Link className="bottom-nav-link" to="/products?category=Puzzles">Puzzles</Link>
+          <Link className="bottom-nav-link" to="/products?category=Arts+and+Crafts">Arts &amp; Crafts</Link>
+          {!isAuthenticated && (
+            <Link className="bottom-nav-link ms-auto" to="/login" style={{ color: '#FF9900' }}>Sign In</Link>
+          )}
+        </div>
+      </div>
     </header>
   )
 }

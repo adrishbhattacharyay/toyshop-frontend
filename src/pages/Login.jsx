@@ -133,7 +133,7 @@ function Login() {
 
                 <button
                   type="submit"
-                  className="btn btn-custom btn-custom-primary w-100 mb-3"
+                  className="auth-submit-btn mb-3"
                   disabled={loading}
                 >
                   {loading ? (

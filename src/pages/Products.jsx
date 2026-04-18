@@ -12,6 +12,11 @@ function Products() {
   const [sortBy, setSortBy] = useState('newest')
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '')
 
+  // Sync category from URL when navigating from Home/Header
+  useEffect(() => {
+    setSelectedCategory(searchParams.get('category') || '')
+  }, [searchParams])
+
   useEffect(() => {
     dispatch(fetchCategories())
   }, [dispatch])
@@ -22,16 +27,9 @@ function Products() {
       size: 20,
       sort: sortBy
     }
-    
-    if (selectedCategory) {
-      params.category = selectedCategory
-    }
-    
+    if (selectedCategory) params.category = selectedCategory
     const search = searchParams.get('search')
-    if (search) {
-      params.keyword = search
-    }
-    
+    if (search) params.keyword = search
     dispatch(fetchProducts(params))
   }, [dispatch, sortBy, selectedCategory, searchParams])
 

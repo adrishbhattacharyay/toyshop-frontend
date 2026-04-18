@@ -10,7 +10,7 @@ function Cart() {
   const navigate = useNavigate()
   const [showPayment, setShowPayment] = useState(false)
 
-  const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  const subtotal = items.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0)
   const tax = Math.round(subtotal * 0.18)
   const shipping = subtotal >= 500 ? 0 : 50
   const total = subtotal + tax + shipping
@@ -89,7 +89,7 @@ function Cart() {
                             </div>
                           </div>
                         </td>
-                        <td>₹{item.price}</td>
+                        <td>₹{parseFloat(item.price).toFixed(2)}</td>
                         <td>
                           <div className="input-group quantity-control" style={{ width: '120px' }}>
                             <button 
@@ -116,7 +116,7 @@ function Cart() {
                           </div>
                         </td>
                         <td>
-                          <strong>₹{item.price * item.quantity}</strong>
+                          <strong>₹{(parseFloat(item.price) * item.quantity).toFixed(2)}</strong>
                         </td>
                         <td>
                           <button 
