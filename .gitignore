@@ -37,6 +37,11 @@ nyc_output/
 cypress/videos/
 cypress/screenshots/
 
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
 # Misc
 *.pem
 .cache/
