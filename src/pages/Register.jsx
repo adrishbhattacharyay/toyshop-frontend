@@ -97,7 +97,7 @@ function Register() {
             <div className="auth-card">
               <div className="text-center mb-4">
                 <h2>Create Account</h2>
-                <p className="text-muted">Join ToyShop today</p>
+                <p className="text-muted">Join VolcanoToysForKids today</p>
               </div>
 
               {error && (

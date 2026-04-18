@@ -24,8 +24,8 @@ function SimpleFooter() {
       </div>
       <div className="footer-bottom">
         <div className="container">
-          <div style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>🧸 ToyShop</div>
-          <p>© 2024 ToyShop. All rights reserved.</p>
+          <div style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>🌋 VolcanoToysForKids</div>
+          <p>© 2024 VolcanoToysForKids. All rights reserved.</p>
         </div>
       </div>
     </footer>

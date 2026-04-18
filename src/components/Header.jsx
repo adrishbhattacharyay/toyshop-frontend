@@ -30,7 +30,7 @@ function Header() {
         <div className="container-fluid d-flex align-items-center gap-2">
           {/* Logo */}
           <Link className="navbar-brand-amz me-2" to="/">
-            🧸 Toy<span>Shop</span>
+            🌋 Volcano<span>ToysForKids</span>
           </Link>
 
           {/* Search */}

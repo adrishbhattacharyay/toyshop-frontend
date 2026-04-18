@@ -43,7 +43,7 @@ function Home() {
               <span className="hero-badge">🔥 MEGA SALE — Up to 50% OFF</span>
               <h1 className="hero-title">India's Favourite<br />Toy Store</h1>
               <p className="hero-subtitle">
-                Discover 1000+ toys for every age. Safe, fun, and delivered fast.
+                Discover 1000+ toys for every age at VolcanoToysForKids. Safe, fun, and delivered fast.
               </p>
               <div className="d-flex gap-3 flex-wrap">
                 <Link to="/products" className="hero-btn-primary">Shop Now</Link>
@@ -135,7 +135,7 @@ function Home() {
         {/* CTA */}
         {!isAuthenticated && (
           <div className="cta-section mb-3">
-            <h3 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>New to ToyShop?</h3>
+            <h3 style={{ fontWeight: 700, marginBottom: '0.5rem' }}>New to VolcanoToysForKids?</h3>
             <p className="text-muted mb-3">Create an account to track orders, save wishlists, and get exclusive deals.</p>
             <div className="d-flex gap-3 justify-content-center flex-wrap">
               <Link to="/register" className="hero-btn-primary">Create Account</Link>
@@ -181,8 +181,8 @@ function Home() {
         </div>
         <div className="footer-bottom">
           <div className="container">
-            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🧸 ToyShop</div>
-            <p>© 2024 ToyShop. All rights reserved.</p>
+            <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🌋 VolcanoToysForKids</div>
+            <p>© 2024 VolcanoToysForKids. All rights reserved.</p>
           </div>
         </div>
       </footer>
