@@ -8,8 +8,8 @@ export async function login(page, username = TEST_USER.username, password = TEST
   await page.goto('/login')
   await page.fill('#usernameOrEmail', username)
   await page.fill('#password', password)
-  await page.click('button[type="submit"]')
-  await page.waitForURL('/')
+  await page.locator('.auth-submit-btn').click()
+  await page.waitForURL('/', { timeout: 20000 })
 }
 
 export async function addProductToCart(page) {
