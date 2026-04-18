@@ -42,6 +42,9 @@ test-results/
 playwright-report/
 playwright/.cache/
 
+# But keep the demo video tracked
+!demo/
+
 # Misc
 *.pem
 .cache/
